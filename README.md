@@ -96,6 +96,9 @@ second line
 
 # attribute sets (field access with dot syntax)
 { a = 15; b = "something else"; }
+
+# recursive attribute sets (fields can reference each other)
+rec { a = 15; b = a * 2; }
 ```
 
 ## Variable bindings
