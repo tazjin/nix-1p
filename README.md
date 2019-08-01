@@ -6,9 +6,8 @@ the language. This page serves as a fast intro to most of the (small) language.
 
 Unless otherwise specified, the word "Nix" refers only to the language below.
 
-Please ping me ([Twitter](https://twitter.com/tazjin),
-[email](mailto:tazjin@google.com)) if something in here confuses you or you
-think something important is missing.
+Please file an issue if something in here confuses you or you think something
+important is missing.
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
@@ -28,6 +27,7 @@ think something important is missing.
     - [`builtins`](#builtins)
     - [`pkgs.lib`](#pkgslib)
     - [`pkgs` itself](#pkgs-itself)
+- [Derivations](#derivations)
 - [Nix Idioms](#nix-idioms)
 
 <!-- markdown-toc end -->
