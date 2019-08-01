@@ -127,9 +127,9 @@ There are no global variables.
 
 ## Functions
 
-All functions in Nix are anonymous. This means that they are treated just like
-data. Giving them names is accomplished by assigning them to variables, or
-setting them as values in an attribute set (more on that below).
+All functions in Nix are anonymous lambdas. This means that they are treated
+just like data. Giving them names is accomplished by assigning them to
+variables, or setting them as values in an attribute set (more on that below).
 
 ```
 # simple function
@@ -401,9 +401,99 @@ general build logic is out of scope for this document.
 
 # Nix Idioms
 
-TODO(tazjin): This section should contain information on various Nix idioms,
-such as import headers, `callPackage`, fixed points (+ overrides / overlays) and
-so on.
+There are several idioms in Nix which are not technically part of the language
+specification, but will commonly be encountered in the wild.
+
+This section is an (incomplete) list of them.
+
+## File lambdas
+
+It is customary to start every file with a function header that receives the
+files dependencies, instead of importing them directly in the file.
+
+Sticking to this pattern lets users of your code easily change out, for example,
+the specific version of `nixpkgs` that is used.
+
+A common file header pattern would look like this:
+
+```nix
+{ pkgs ? import <nixpkgs> {} }:
+
+# ... 'pkgs' is then used in the code
+```
+
+In some sense, you might consider the function header of a file to be its "API".
+
+## `callPackage`
+
+Building on the previous pattern, there is a custom in nixpkgs of specifying the
+dependencies of your file explicitly instead of accepting the entire package
+set.
+
+For example, a file containing build instructions for a tool that needs the
+standard build environment and `libsvg` might start like this:
+
+```nix
+# my-funky-program.nix
+{ stdenv, libsvg }:
+
+stdenv.mkDerivation { ... }
+```
+
+Any time a file follows this header pattern it is probably meant to be imported
+using a special function called `callPackage` which is part of the top-level
+package set (as well as certain subsets, such as `haskellPackages`).
+
+```nix
+{ pkgs ? import <nixpkgs> {} }:
+
+let my-funky-program = callPackage ./my-funky-program.nix {};
+in # ... something happens with my-funky-program
+```
+
+The `callPackage` function looks at the expected arguments (via
+`builtins.functionArgs`) and passes the appropriate keys from the set in which
+it is defined as the values for each corresponding argument.
+
+## Overrides / Overlays
+
+One of the most powerful features of Nix is that the representation of all build
+instructions as data means that they can easily be *overridden* to get a
+different result.
+
+For example, assuming there is a package `someProgram` which is built without
+our favourite configuration flag (`--mimic-threaten-tag`) we might override it
+like this:
+
+```nix
+someProgram.overrideAttrs(old: {
+    configureFlags = old.configureFlags ++ ["--mimic-threaten-tag"];
+})
+```
+
+This pattern has a variety of applications of varying complexity. The top-level
+package set itself can have an `overlays` argument passed to it which may add
+new packages to the imported set.
+
+For a slightly more advanced example, assume that we want to import `<nixpkgs>`
+but have the modification above be reflected in the imported package set:
+
+```nix
+let
+  overlay = (self: super: {
+    someProgram = super.someProgram.overrideAttrs(old: {
+      configureFlags = old.configureFlags ++ ["--mimic-threaten-tag"];
+    });
+  });
+in import <nixpkgs> { overlays = [ overlay ]; }
+```
+
+The overlay function receives two arguments, `self` and `super`. `self` is
+the [fixed point][fp] of the overlay's evaluation, i.e. the package set
+*including* the new packages and `super` is the "original" package set.
+
+See the Nix manual sections [on overrides][] and [on overlays][] for more
+details.
 
 [currying]: https://en.wikipedia.org/wiki/Currying
 [builtins]: https://nixos.org/nix/manual/#ssec-builtins
@@ -414,3 +504,6 @@ so on.
 [trivial builders]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders.nix
 [smkd]: https://nixos.org/nixpkgs/manual/#chap-stdenv
 [drv-manual]: https://nixos.org/nix/manual/#ssec-derivation
+[fp]: https://github.com/NixOS/nixpkgs/blob/master/lib/fixed-points.nix
+[on overrides]: https://nixos.org/nixpkgs/manual/#sec-overrides
+[on overlays]: https://nixos.org/nixpkgs/manual/#chap-overlays
