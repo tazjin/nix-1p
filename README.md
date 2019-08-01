@@ -29,6 +29,9 @@ important is missing.
     - [`pkgs` itself](#pkgs-itself)
 - [Derivations](#derivations)
 - [Nix Idioms](#nix-idioms)
+    - [File lambdas](#file-lambdas)
+    - [`callPackage`](#callpackage)
+    - [Overrides / Overlays](#overrides--overlays)
 
 <!-- markdown-toc end -->
 
@@ -253,9 +256,10 @@ This is often convenient, especially because inherit supports multiple variables
 at the same time as well as "inheritance" from other attribute sets:
 
 ```nix
-inherit name age; # equivalent to `name = name; age = age;`
-
-inherit (otherAttrs) email; # equivalent to `email = otherAttrs.email`;
+{
+  inherit name age; # equivalent to `name = name; age = age;`
+  inherit (otherAttrs) email; # equivalent to `email = otherAttrs.email`;
+}
 ```
 
 ## `with` statements
