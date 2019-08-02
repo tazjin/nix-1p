@@ -503,6 +503,7 @@ details.
 [builtins]: https://nixos.org/nix/manual/#ssec-builtins
 [nixpkgs]: https://github.com/NixOS/nixpkgs
 [lib-src]: https://github.com/NixOS/nixpkgs/tree/master/lib
+[nixdoc]: https://github.com/tazjin/nixdoc
 [lib-manual]: https://nixos.org/nixpkgs/manual/#sec-functions-library
 [channels]: https://nixos.org/nix/manual/#sec-channels
 [trivial builders]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders.nix
