@@ -117,8 +117,8 @@ Nix has several operators, most of which are unsurprising:
 | `==`                 | Equality                                                                    |
 | `>`, `>=`, `<`, `<=` | Ordering comparators                                                        |
 | `&&`                 | Logical `AND`                                                               |
-| `\|\|`               | Logical `OR`                                                                |
-| `e1 -> e2`           | Logical implication (i.e. `!e1 \|\| e2`)                                    |
+| <code>&vert;&vert;</code> | Logical `OR`                                                           |
+| `e1 -> e2`           | Logical implication (i.e. <code>!e1 &vert;&vert; e2</code>)                 |
 | `!`                  | Boolean negation                                                            |
 | `set.attr`           | Access attribute `attr` in attribute set `set`                              |
 | `set ? attribute`    | Test whether attribute set contains an attribute                            |
