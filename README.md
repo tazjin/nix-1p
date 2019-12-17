@@ -474,7 +474,7 @@ package set (as well as certain subsets, such as `haskellPackages`).
 ```nix
 { pkgs ? import <nixpkgs> {} }:
 
-let my-funky-program = callPackage ./my-funky-program.nix {};
+let my-funky-program = pkgs.callPackage ./my-funky-program.nix {};
 in # ... something happens with my-funky-program
 ```
 
