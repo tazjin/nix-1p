@@ -348,7 +348,7 @@ in set.a or 23
 Since the attribute `a` exists, this will return `42`.
 
 
-```
+```nix
 # ... or fall back to a default if there is no such key
 let set = { };
 in set.a or 23
@@ -356,6 +356,8 @@ in set.a or 23
 
 Since the attribute `a` does not exist, this will fall back to returning the
 default value `23`.
+
+Note that `or` expressions also work for nested attribute set access.
 
 # Standard libraries
 
