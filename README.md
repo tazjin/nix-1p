@@ -23,7 +23,8 @@ important is missing.
     - [`if ... then ... else ...`](#if--then--else-)
     - [`inherit` keyword](#inherit-keyword)
     - [`with` statements](#with-statements)
-    - [`import` / `NIX_PATH` / `<entry>`](#import--nixpath--entry)
+    - [`import` / `NIX_PATH` / `<entry>`](#import--nix_path--entry)
+    - [`or` expressions](#or-expressions)
 - [Standard libraries](#standard-libraries)
     - [`builtins`](#builtins)
     - [`pkgs.lib`](#pkgslib)
@@ -330,6 +331,31 @@ This is commonly used to import from channels:
 let pkgs = import <nixpkgs> {};
 in pkgs.something
 ```
+
+## `or` expressions
+
+Nix has a keyword called `or` which can be used to access a value from an
+attribute set while providing a fallback to a default value.
+
+The syntax is simple:
+
+```nix
+# Access an existing attribute
+let set = { a = 42; };
+in set.a or 23
+```
+
+Since the attribute `a` exists, this will return `42`.
+
+
+```
+# ... or fall back to a default if there is no such key
+let set = { };
+in set.a or 23
+```
+
+Since the attribute `a` does not exist, this will fall back to returning the
+default value `23`.
 
 # Standard libraries
 
