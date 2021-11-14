@@ -549,13 +549,20 @@ like this:
 
 ```nix
 someProgram.overrideAttrs(old: {
-    configureFlags = old.configureFlags ++ ["--mimic-threaten-tag"];
+    configureFlags = old.configureFlags or [] ++ ["--mimic-threaten-tag"];
 })
 ```
 
 This pattern has a variety of applications of varying complexity. The top-level
 package set itself can have an `overlays` argument passed to it which may add
 new packages to the imported set.
+
+Note the use of the `or` operator to default to an empty list if the
+original flags do not include `configureFlags`. This is required in
+case a package does not set any flags by itself.
+
+Since this can change in a package over time, it is useful to guard
+against it using `or`.
 
 For a slightly more advanced example, assume that we want to import `<nixpkgs>`
 but have the modification above be reflected in the imported package set:
@@ -564,7 +571,7 @@ but have the modification above be reflected in the imported package set:
 let
   overlay = (self: super: {
     someProgram = super.someProgram.overrideAttrs(old: {
-      configureFlags = old.configureFlags ++ ["--mimic-threaten-tag"];
+      configureFlags = old.configureFlags or [] ++ ["--mimic-threaten-tag"];
     });
   });
 in import <nixpkgs> { overlays = [ overlay ]; }
