@@ -234,6 +234,33 @@ let greeter = { name, age, ... }: "${name} is ${toString age} years old";
 in greeter person # ... but the call works due to the ellipsis.
 ```
 
+Nix also supports binding the whole set of passed in attributes to a
+parameter using the `@` syntax:
+
+```nix
+let func = { name, age, ... }@args: builtins.attrNames args;
+in func {
+    name = "Slartibartfast";
+    age = 42;
+    email = "slartibartfast@magrath.ea";
+}
+
+# yields: [ "age" "email" "name" ]
+```
+
+**Warning:** Combining the `@` syntax with default arguments can lead
+to surprising behaviour, as the passed attributes are bound verbatim.
+This means that defaulted arguments are not included in the bound
+attribute set:
+
+```nix
+({ a ? 1, b }@args: args.a) { b = 1; }
+# throws: error: attribute 'a' missing
+
+({ a ? 1, b }@args: args.a) { b = 1; a = 2; }
+# => 2
+```
+
 ## `if ... then ... else ...`
 
 Nix has simple conditional support. Note that `if` is an **expression** in Nix,
