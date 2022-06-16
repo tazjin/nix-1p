@@ -4,8 +4,9 @@
 # This file configures TVL CI to mirror the subtree to GitHub.
 { depot ? { }, pkgs ? import <nixpkgs> { }, ... }:
 
-(pkgs.runCommandLocal "nix-1p.md" { } ''
-  cp ${./README.md} $out
+(pkgs.runCommandLocal "nix-1p" { } ''
+  mkdir $out
+  cp ${./README.md} $out/README.md
 '').overrideAttrs (_: {
   meta.ci.extraSteps.github = depot.tools.releases.filteredGitPush {
     filter = ":/nix/nix-1p";
