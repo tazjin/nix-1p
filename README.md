@@ -569,7 +569,7 @@ but have the modification above be reflected in the imported package set:
 
 ```nix
 let
-  overlay = (self: super: {
+  overlay = (final: prev: {
     someProgram = super.someProgram.overrideAttrs(old: {
       configureFlags = old.configureFlags or [] ++ ["--mimic-threaten-tag"];
     });
@@ -577,9 +577,9 @@ let
 in import <nixpkgs> { overlays = [ overlay ]; }
 ```
 
-The overlay function receives two arguments, `self` and `super`. `self` is
+The overlay function receives two arguments, `final` and `prev`. `final` is
 the [fixed point][fp] of the overlay's evaluation, i.e. the package set
-*including* the new packages and `super` is the "original" package set.
+*including* the new packages and `prev` is the "original" package set.
 
 See the Nix manual sections [on overrides][] and [on overlays][] for more
 details.
