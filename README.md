@@ -582,7 +582,7 @@ the [fixed point][fp] of the overlay's evaluation, i.e. the package set
 *including* the new packages and `prev` is the "original" package set.
 
 See the Nix manual sections [on overrides][] and [on overlays][] for more
-details.
+details. (Note that the convention has moved away from using `self` in favor of `final` and `prev` instead of `super` but the documentation hasn't been update to reflect this.)
 
 [currying]: https://en.wikipedia.org/wiki/Currying
 [builtins]: https://nixos.org/nix/manual/#ssec-builtins
