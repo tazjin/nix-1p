@@ -325,14 +325,16 @@ in with attrs; a + b # 'a' and 'b' become variables in the scope following 'with
 
 ## `import` / `NIX_PATH` / `<entry>`
 
-Nix files can import each other by using the `import` keyword and a literal
-path:
+Nix files can import each other by using the builtin `import` function and a
+literal path:
 
 ```nix
 # assuming there is a file lib.nix with some useful functions
 let myLib = import ./lib.nix;
 in myLib.usefulFunction 42
 ```
+
+The `import` function will read and evaluate the file, and return its Nix value.
 
 Nix files often begin with a function header to pass parameters into the rest of
 the file, so you will often see imports of the form `import ./some-file { ... }`.
