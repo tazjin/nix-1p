@@ -9,6 +9,9 @@ Unless otherwise specified, the word "Nix" refers only to the language below.
 Please file an issue if something in here confuses you or you think something
 important is missing.
 
+If you have Nix installed, you can try the examples below by running `nix repl`
+and entering code snippets there.
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
