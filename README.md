@@ -326,6 +326,14 @@ let attrs = { a = 15; b = 2; };
 in with attrs; a + b # 'a' and 'b' become variables in the scope following 'with'
 ```
 
+The scope of a `with`-"block" is the expression immediately following the
+semicolon, i.e.:
+
+```nix
+let attrs = { /* some attributes */ };
+in with attrs; (/* this is the scope of the `with` */)
+```
+
 ## `import` / `NIX_PATH` / `<entry>`
 
 Nix files can import each other by using the builtin `import` function and a
