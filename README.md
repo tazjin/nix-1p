@@ -600,15 +600,15 @@ details (note: the convention has moved away from using `self` in favor of
 updated to reflect this).
 
 [currying]: https://en.wikipedia.org/wiki/Currying
-[builtins]: https://nixos.org/nix/manual/#ssec-builtins
+[builtins]: https://nixos.org/manual/nix/stable/language/builtins
 [nixpkgs]: https://github.com/NixOS/nixpkgs
 [lib-src]: https://github.com/NixOS/nixpkgs/tree/master/lib
 [nixdoc]: https://github.com/tazjin/nixdoc
-[lib-manual]: https://nixos.org/nixpkgs/manual/#sec-functions-library
-[channels]: https://nixos.org/nix/manual/#sec-channels
-[trivial builders]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders.nix
-[smkd]: https://nixos.org/nixpkgs/manual/#chap-stdenv
-[drv-manual]: https://nixos.org/nix/manual/#ssec-derivation
+[lib-manual]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
+[channels]: https://nixos.org/manual/nix/stable/command-ref/files/channels
+[trivial builders]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders/default.nix
+[smkd]: https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
+[drv-manual]: https://nixos.org/manual/nix/stable/language/derivations
 [fp]: https://github.com/NixOS/nixpkgs/blob/master/lib/fixed-points.nix
-[on overrides]: https://nixos.org/nixpkgs/manual/#sec-overrides
-[on overlays]: https://nixos.org/nixpkgs/manual/#chap-overlays
+[on overrides]: https://nixos.org/manual/nixpkgs/stable/#chap-overrides
+[on overlays]: https://nixos.org/manual/nixpkgs/stable/#chap-overlays
