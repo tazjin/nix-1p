@@ -19,6 +19,7 @@ and entering code snippets there.
 - [Language constructs](#language-constructs)
     - [Primitives / literals](#primitives--literals)
     - [Operators](#operators)
+        - [`//` (merge) operator](#-merge-operator)
     - [Variable bindings](#variable-bindings)
     - [Functions](#functions)
         - [Multiple arguments (currying)](#multiple-arguments-currying)
@@ -113,8 +114,6 @@ rec { a = 15; b = a * 2; }
 
 Nix has several operators, most of which are unsurprising:
 
-Make sure to understand the `//`-operator, as it is used quite a lot and is
-probably the least familiar one.
 | Syntax                    | Description                                                                 |
 |---------------------------|-----------------------------------------------------------------------------|
 | `+`, `-`, `*`, `/`        | Numerical operations                                                        |
@@ -130,6 +129,37 @@ probably the least familiar one.
 | `set ? attribute`         | Test whether attribute set contains an attribute                            |
 | `left // right`           | Merge `left` & `right` attribute sets, with the right set taking precedence |
 
+
+### `//` (merge) operator
+
+The `//`-operator is used pervasively in Nix code. You should familiarise
+yourself with it, as it is likely also the least familiar one.
+
+It merges the left and right attribute sets given to it:
+
+```nix
+{ a = 1; } // { b = 2; }
+
+# yields { a = 1; b = 2; }
+```
+
+Values from the right side take precedence:
+
+```nix
+{ a = "left"; } // { a = "right"; }
+
+# yields { a = "right"; }
+```
+
+The merge operator does *not* recursively merge attribute sets;
+
+```nix
+{ a = { b = 1; }; } // { a = { c = 2; }; }
+
+# yields { a = { c = 2; }; }
+```
+
+Helper functions for recursive merging exist in the [`lib` library](#pkgslib).
 
 ## Variable bindings
 
