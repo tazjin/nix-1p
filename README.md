@@ -113,23 +113,23 @@ rec { a = 15; b = a * 2; }
 
 Nix has several operators, most of which are unsurprising:
 
-| Syntax               | Description                                                                 |
-|----------------------|-----------------------------------------------------------------------------|
-| `+`, `-`, `*`, `/`   | Numerical operations                                                        |
-| `+`                  | String concatenation                                                        |
-| `++`                 | List concatenation                                                          |
-| `==`                 | Equality                                                                    |
-| `>`, `>=`, `<`, `<=` | Ordering comparators                                                        |
-| `&&`                 | Logical `AND`                                                               |
-| <code>&vert;&vert;</code> | Logical `OR`                                                           |
-| `e1 -> e2`           | Logical implication (i.e. <code>!e1 &vert;&vert; e2</code>)                 |
-| `!`                  | Boolean negation                                                            |
-| `set.attr`           | Access attribute `attr` in attribute set `set`                              |
-| `set ? attribute`    | Test whether attribute set contains an attribute                            |
-| `left // right`      | Merge `left` & `right` attribute sets, with the right set taking precedence |
-
 Make sure to understand the `//`-operator, as it is used quite a lot and is
 probably the least familiar one.
+| Syntax                    | Description                                                                 |
+|---------------------------|-----------------------------------------------------------------------------|
+| `+`, `-`, `*`, `/`        | Numerical operations                                                        |
+| `+`                       | String concatenation                                                        |
+| `++`                      | List concatenation                                                          |
+| `==`                      | Equality                                                                    |
+| `>`, `>=`, `<`, `<=`      | Ordering comparators                                                        |
+| `&&`                      | Logical `AND`                                                               |
+| <code>&vert;&vert;</code> | Logical `OR`                                                                |
+| `e1 -> e2`                | Logical implication (i.e. <code>!e1 &vert;&vert; e2</code>)                 |
+| `!`                       | Boolean negation                                                            |
+| `set.attr`                | Access attribute `attr` in attribute set `set`                              |
+| `set ? attribute`         | Test whether attribute set contains an attribute                            |
+| `left // right`           | Merge `left` & `right` attribute sets, with the right set taking precedence |
+
 
 ## Variable bindings
 
