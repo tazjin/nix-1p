@@ -50,8 +50,7 @@ Nix is:
     any dependency between operations is established by depending on *data* from
     previous operations.
 
-    Everything in Nix is an expression, meaning that every directive returns
-    some kind of data.
+    Any valid piece of Nix code is an *expression* that returns a value.
 
     Evaluating a Nix expression *yields a single data structure*, it does not
     execute a sequence of operations.
