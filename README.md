@@ -1,8 +1,3 @@
-> [!TIP]
-> Are you interested in hacking on Nix projects for a week, together
-> with other Nix users? Do you have time at the end of August? Great,
-> come join us at [Volga Sprint](https://volgasprint.org/)!
-
 Nix - A One Pager
 =================
 
